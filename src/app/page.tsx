@@ -34,12 +34,10 @@ type ApiResponse = {
   highest_lowercase_alphabet: string[];
 };
 
-type Option = { value: string; label: string };
-
-const options: Option[] = [
-  { value: 'alphabets', label: 'Alphabets' },
-  { value: 'numbers', label: 'Numbers' },
-  { value: 'highest_lowercase_alphabet', label: 'Highest lowercase alphabet' },
+const options = [
+  { value: "alphabets", label: "Alphabets" },
+  { value: "numbers", label: "Numbers" },
+  { value: "highest_lowercase_alphabet", label: "Highest lowercase alphabet" },
 ];
 
 export default function Home() {
@@ -100,15 +98,18 @@ export default function Home() {
             API Response:
           </h2>
           <Controller
+            
             name="selectedOptions"
             control={control}
             render={({ field }) => (
-              <Select<Option,true>
+              <Select
                 {...field}
+                // @ts-ignore
                 options={options}
-                value={options.filter(option => field.value?.includes(option.value))}
+                isMulti
                 onChange={(val) => {
                   field.onChange(val);
+                  // @ts-ignore
                   setSelectedOptions(val.map((option) => option.value));
                 }}
                 className="mb-4 text-gray-800"
