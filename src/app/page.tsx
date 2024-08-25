@@ -34,10 +34,7 @@ type ApiResponse = {
   highest_lowercase_alphabet: string[];
 };
 
-type Option = {
-  value: string;
-  label: string;
-};
+type Option = { value: string; label: string };
 
 const options: Option[] = [
   { value: 'alphabets', label: 'Alphabets' },
@@ -106,10 +103,10 @@ export default function Home() {
             name="selectedOptions"
             control={control}
             render={({ field }) => (
-              <Select
+              <Select<Option,true>
                 {...field}
                 options={options}
-                isMulti
+                value={options.filter(option => field.value?.includes(option.value))}
                 onChange={(val) => {
                   field.onChange(val);
                   setSelectedOptions(val.map((option) => option.value));
